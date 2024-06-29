@@ -1,0 +1,7 @@
+:root {
+  --reddy: mistyrose;
+}
+
+.test {
+  color: var(--reddy);
+}
