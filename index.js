@@ -25,25 +25,43 @@ const Gameboard = (function () {
     [2, 4, 6],
   ];
 
+  const checkWin = () => {};
+
   return { printBoard, placeMarker, resetBoard, win };
 })();
 
 function Player(playerName, playerMark) {
   const name = playerName.charAt(0).toUpperCase() + playerName.slice(1);
   const mark = playerMark;
+  let isMove = false;
   const { placeMarker } = Gameboard;
-  return { name, mark, placeMarker };
+  return { name, mark, isMove, placeMarker };
 }
 
 const game = (function () {
-  const startGame = readlineSync.question(
-    "Would you like to play a game of Tic Tac Toe? (yes or no)"
-  );
-  const player1Name = readlineSync.question("Please enter a name for player 1");
-  const player2Name =
-    readlineSync.question("Please enter a name for player 2") || "Computer";
+  let playing = false;
 
-  console.log(startGame, player1Name, player2Name);
+  while (playing === false) {
+    const startGame = readlineSync.question(
+      "Would you like to play a game of Tic Tac Toe? (yes or no)"
+    );
+
+    if (startGame.trim().toLowerCase() === "yes") {
+      playing = true;
+    }
+    // playing = true;
+  }
+
+  const player1Name = readlineSync.question(
+    "Please enter a name for player 1: "
+  );
+  const player2Name =
+    readlineSync.question("Please enter a name for player 2: ") || "Computer";
+
+  const player1 = Player(player1Name, "X");
+  const player2 = Player(player2Name, "O");
+
+  console.log(player1, player2);
 })();
 
 // function Player(name) {
