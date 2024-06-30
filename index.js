@@ -64,6 +64,7 @@ const game = (function () {
   console.log(player1, player2);
 })();
 
+const GameDisplay = function () {};
 // function Player(name) {
 //   this.name = name;
 //   this.score = 0;
