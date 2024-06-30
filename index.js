@@ -1,4 +1,12 @@
-const readlineSync = require("readline-sync");
+// import { createRequire } from "module";
+// const require = createRequire(import.meta.url);
+// // const requirejs = require("requirejs");
+
+// // requirejs.config({
+// //   baseUrl: __dirname,
+// //   nodeRequire: require,
+// // });
+// const readlineSync = require("readline-sync");
 
 const Gameboard = (function () {
   let board = new Array(9);
@@ -42,7 +50,13 @@ const game = (function () {
   let playing = false;
 
   while (playing === false) {
-    const startGame = readlineSync.question(
+    /* readlineSync only works in node.js
+    returns error in browser */
+    // const startGame = readlineSync.question(
+    //   "Would you like to play a game of Tic Tac Toe? (yes or no)"
+    // );
+
+    const startGame = prompt(
       "Would you like to play a game of Tic Tac Toe? (yes or no)"
     );
 
@@ -52,11 +66,21 @@ const game = (function () {
     // playing = true;
   }
 
-  const player1Name = readlineSync.question(
-    "Please enter a name for player 1: "
-  );
+  /* readlineSync only works in node.js
+    returns error in browser */
+  // const player1Name = readlineSync.question(
+  //   "Please enter a name for player 1: "
+  // );
+
+  const player1Name = prompt("Please enter a name for player 1: ");
+
+  /* readlineSync only works in node.js
+    returns error in browser */
+  // const player2Name =
+  //   readlineSync.question("Please enter a name for player 2: ") || "Computer";
+
   const player2Name =
-    readlineSync.question("Please enter a name for player 2: ") || "Computer";
+    prompt("Please enter a name for player 2: ") || "Computer";
 
   const player1 = Player(player1Name, "X");
   const player2 = Player(player2Name, "O");
@@ -64,7 +88,10 @@ const game = (function () {
   console.log(player1, player2);
 })();
 
-const GameDisplay = function () {};
+const GameDisplay = (function () {
+  const squares = document.querySelectorAll(".square");
+  console.log(squares);
+})();
 // function Player(name) {
 //   this.name = name;
 //   this.score = 0;
@@ -88,6 +115,7 @@ const GameDisplay = function () {};
 
 function init() {
   game;
+  GameDisplay;
 }
 
 init();
