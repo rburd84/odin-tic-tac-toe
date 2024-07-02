@@ -100,13 +100,13 @@ const game = (function () {
     square.addEventListener("click", (e) => {
       // console.log(e.target);
       // console.log(Gameboard.board.length);
-      if (player1.isMove) {
+      if (player1.isMove && !square.textContent) {
         player1.placeMarker(idx, player1.mark);
         player1.isMove = false;
         player2.isMove = true;
         console.log(idx, e.target, Gameboard.printBoard());
         GameDisplay;
-      } else {
+      } else if (player2.isMove && !square.textContent){
         player2.placeMarker(idx, player2.mark);
         player2.isMove = false;
         player1.isMove = true;
