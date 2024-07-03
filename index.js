@@ -33,9 +33,17 @@ const Gameboard = (function () {
     [2, 4, 6],
   ];
 
-  const checkWin = () => {};
+  const checkWin = () => {
+    win.forEach(w => {
+      if (board[w[0]] === board[w[1]] && board[w[0]] === board[w[2]] && board[w[0]] !== "") {
+        console.log("Winner, winner, chicken dinner");
+        return true;
+      }
+    });
+    return false;
+  };
 
-  return { printBoard, placeMarker, resetBoard, win, board };
+  return { printBoard, placeMarker, resetBoard, checkWin, board };
 })();
 
 function Player(playerName, playerMark) {
@@ -92,31 +100,34 @@ const game = (function () {
   // player2.placeMarker(4, "O")
 
   while (playing) {
+    
+    document.querySelectorAll(".square").forEach((square, idx) => {
+      square.addEventListener("click", (e) => {
+        
+        if (player1.isMove && !square.textContent) {
+          player1.placeMarker(idx, player1.mark);
+          player1.isMove = false;
+          player2.isMove = true;
+          console.log(idx, e.target, Gameboard.printBoard());
+          
+        } else if (player2.isMove && !square.textContent){
+          player2.placeMarker(idx, player2.mark);
+          player2.isMove = false;
+          player1.isMove = true;
+          console.log(idx, e.target, Gameboard.printBoard());
+          
+        }
+        Gameboard.checkWin();
+        GameDisplay.displayBoard();
+        
+      });
+    })
+
     if (Gameboard.board.length === 9) {
+      console.log("Game should end, determine winner, stop further selection");
       playing = false;
     }
 
-    document.querySelectorAll(".square").forEach((square, idx) => {
-    square.addEventListener("click", (e) => {
-      // console.log(e.target);
-      // console.log(Gameboard.board.length);
-      if (player1.isMove && !square.textContent) {
-        player1.placeMarker(idx, player1.mark);
-        player1.isMove = false;
-        player2.isMove = true;
-        console.log(idx, e.target, Gameboard.printBoard());
-        GameDisplay;
-      } else if (player2.isMove && !square.textContent){
-        player2.placeMarker(idx, player2.mark);
-        player2.isMove = false;
-        player1.isMove = true;
-        console.log(idx, e.target, Gameboard.printBoard());
-        
-      }
-      GameDisplay.displayBoard();
-      
-    });
-  })
   }
 
   console.log(player1, player2, Gameboard.printBoard());
