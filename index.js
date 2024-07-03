@@ -1,12 +1,3 @@
-// import { createRequire } from "module";
-// const require = createRequire(import.meta.url);
-// // const requirejs = require("requirejs");
-
-// // requirejs.config({
-// //   baseUrl: __dirname,
-// //   nodeRequire: require,
-// // });
-// const readlineSync = require("readline-sync");
 
 const Gameboard = (function () {
   let board = new Array(9).fill("");
@@ -94,10 +85,6 @@ const game = (function () {
   const player1 = Player(player1Name, "X");
   player1.isMove = true;
   const player2 = Player(player2Name, "O");
-  // player1.placeMarker(1, "X")
-  // player2.placeMarker(2, "O")
-  // player1.placeMarker(3, "X")
-  // player2.placeMarker(4, "O")
 
   while (playing) {
     
@@ -134,27 +121,12 @@ const game = (function () {
 })();
 
 const GameDisplay = (function () {
-  // const squares = document.querySelectorAll(".square");
-  // squares.forEach(square => {
-  //   square.addEventListener("click", (e) => {
-  //     console.log(e.target);
-  //   });
-  // })
   const displayBoard = () => {
     document.querySelectorAll(".square").forEach((square, idx) => {
       square.textContent = Gameboard.board[idx]
-      // square.addEventListener("click", (e) => {
-      //   console.log(e.target);
-      // });
     })
-
   }
-  // document.querySelectorAll(".square").forEach((square, idx) => {
-  //   square.value = Gameboard.board[idx]
-  //   // square.addEventListener("click", (e) => {
-  //   //   console.log(e.target);
-  //   // });
-  // })
+  
   return {displayBoard}
 })();
 // function Player(name) {
